@@ -8,7 +8,7 @@ namespace Assignment5
     public class Inventory
     {
         // The dictionary items consist of the item and the quantity
-        private Dictionary<Item, int> items;
+        private Dictionary<Item, int> items=new Dictionary<Item, int>();
 
         public int AvailableSlots
         {
@@ -34,8 +34,8 @@ namespace Assignment5
         private int maxSlots;
         public Inventory(int slots)
         {
-            availableSlots = maxSlots;
             maxSlots = slots;
+            availableSlots = maxSlots;
         }
 
         /// <summary>
@@ -53,11 +53,14 @@ namespace Assignment5
         /// <param name="name">The item name</param>
         /// <param name="found">The item if found</param>
         /// <returns>True if you find the item, and false if it does not exist.</returns>
-        bool TakeItem(string name, out Item found)
+       public bool TakeItem(string name, out Item found)
         {
             found = items.ToList().Find(x => x.Key.Name == name).Key;
+
             if (found != null)
             {
+            items.Remove(found);
+                ++availableSlots;
                 return true;
             }
             else
@@ -71,7 +74,7 @@ namespace Assignment5
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        bool AddItem(Item item)
+        public bool AddItem(Item item)
         {
             // Add it in the items dictionary and increment it the number if it already exist
             // Reduce the slot once it's been added.
@@ -85,10 +88,10 @@ namespace Assignment5
             }
             else
             {
-                if (AvailableSlots < MaxSlots)
+                if (AvailableSlots >0)
                 {
                     items.Add(item, 1);
-                    ++availableSlots;
+                    --availableSlots;
                     return true;
                 }
                 else
@@ -103,7 +106,7 @@ namespace Assignment5
         /// Iterates through the dictionary and create a list of all the items.
         /// </summary>
         /// <returns></returns>
-        List<Item> ListAllItems()
+        public List<Item> ListAllItems()
         {
             // use a foreach loop to iterate through the key value pairs and duplicate the item base on the quantity.
 

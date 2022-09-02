@@ -4,7 +4,7 @@ namespace Assignment5
 {
     class Program
     {
-        static void Main(string[] args)
+       public static void main(string[] args)
         {
             Console.WriteLine("Welcome to the Adventure of Assignment 5!");
 

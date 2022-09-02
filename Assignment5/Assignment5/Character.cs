@@ -57,6 +57,10 @@ namespace Assignment5
         public void RestoreHealth(int amount)
         {
             Health += Math.Abs(amount);
+            if(Health>0 && IsAlive==false)
+            {
+                IsAlive = true;
+            }
         }
 
         public override string ToString()
